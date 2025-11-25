@@ -16,7 +16,7 @@ export class WebInputsPage extends MainPage {
   constructor(page: Page) {
     super(page);
     this.displayInputsButton = page.getByRole('button', { name: 'Display Inputs' });
-    this.clearInputsButton = page.getByRole('button', { name: 'Funds withdrawal' });
+    this.clearInputsButton = page.getByRole('button', { name: 'Clear Inputs' });
     this.inputNumberBox = page.getByRole('spinbutton', { name: 'Input: Number' });
     this.inputTextBox = page.getByRole('textbox', { name: 'Input: Text' });
     this.inputPasswordBox = page.getByRole('textbox', { name: 'Input: Password' });
@@ -24,5 +24,10 @@ export class WebInputsPage extends MainPage {
   }
 
   // Open "Web inputs" site
-  async openWebInputsPage() {}
+  async openWebInputsPage() {
+    await this.page.goto('https://practice.expandtesting.com/inputs', {
+      waitUntil: 'domcontentloaded',
+    });
+    await this.displayInputsButton.waitFor();
+  }
 }
