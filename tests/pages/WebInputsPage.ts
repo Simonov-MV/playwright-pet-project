@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
-import { MainPage } from './MainPage';
+import { BasePage } from './BasePage';
 
-export class WebInputsPage extends MainPage {
+export class WebInputsPage extends BasePage {
   openCreatLinkSite() {
     throw new Error('Method not implemented.');
   }
@@ -12,6 +12,10 @@ export class WebInputsPage extends MainPage {
   readonly inputTextBox: Locator;
   readonly inputPasswordBox: Locator;
   readonly inputDateBox: Locator;
+  readonly outputNumberBox: Locator;
+  readonly outputTextBox: Locator;
+  readonly outputPasswordBox: Locator;
+  readonly outputDateBox: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -21,6 +25,10 @@ export class WebInputsPage extends MainPage {
     this.inputTextBox = page.getByRole('textbox', { name: 'Input: Text' });
     this.inputPasswordBox = page.getByRole('textbox', { name: 'Input: Password' });
     this.inputDateBox = page.getByRole('textbox', { name: 'Input: Date' });
+    this.outputNumberBox = page.locator('#output-number');
+    this.outputTextBox = page.locator('#output-text');
+    this.outputPasswordBox = page.locator('#output-password');
+    this.outputDateBox = page.locator('#output-date');
   }
 
   // Open "Web inputs" site

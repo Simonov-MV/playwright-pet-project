@@ -4,11 +4,38 @@ import { WebInputsPage } from '../../pages/WebInputsPage';
 test.describe('Tests Web Inputs Page', () => {
   let webInputsPage: WebInputsPage;
 
-  test('Test Web Inputs', async ({ page }) => {
+  test.beforeEach(async ({ page }) => {
     webInputsPage = new WebInputsPage(page);
     await webInputsPage.openWebInputsPage();
+  });
+
+  test('Test Web Inputs', async ({ page }) => {
     await expect(page.locator('h1')).toContainText(
       'Web inputs page for Automation Testing Practice',
     );
+  });
+
+  test('Input number', async ({ page }) => {
+    await webInputsPage.inputNumberBox.fill('234');
+    await webInputsPage.displayInputsButton.click();
+    await expect(webInputsPage.outputNumberBox).toContainText('234');
+  });
+
+  test('Input text', async ({ page }) => {
+    await webInputsPage.inputTextBox.fill('test');
+    await webInputsPage.displayInputsButton.click();
+    await expect(webInputsPage.outputTextBox).toContainText('test');
+  });
+
+  test('Input password', async ({ page }) => {
+    await webInputsPage.inputPasswordBox.fill('234');
+    await webInputsPage.displayInputsButton.click();
+    await expect(webInputsPage.outputPasswordBox).toContainText('234');
+  });
+
+  test('Input date', async ({ page }) => {
+    await webInputsPage.inputDateBox.fill('2025-12-12');
+    await webInputsPage.displayInputsButton.click();
+    await expect(webInputsPage.outputDateBox).toContainText('2025-12-12');
   });
 });
