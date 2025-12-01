@@ -1,24 +1,16 @@
-stages:
-  - build
-  - test
-  - deploy
+# .gitlab-ci.yml
+image: mcr.microsoft.com/playwright:v1.49.0-jammy
 
-build-job:
-  stage: build
-  script:
-    - echo "Собираем проект..."
-    - echo "Компиляция завершена!"
+stages:
+  - test
 
 test-job:
   stage: test
   script:
-    - echo "Запускаем тесты..."
-    - echo "Все тесты прошли успешно!"
-
-deploy-job:
-  stage: deploy
-  script:
-    - echo "Деплоим приложение..."
-    - echo "Деплой завершён!"
-  only:
-    - main
+    - npm ci
+    - npx playwright test
+  artifacts:
+    when: always
+    paths:
+      - playwright-report/
+    expire_in: 1 week
