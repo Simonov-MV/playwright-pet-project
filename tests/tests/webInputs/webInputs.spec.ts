@@ -38,4 +38,23 @@ test.describe('Tests Web Inputs Page', () => {
     await webInputsPage.displayInputsButton.click();
     await expect(webInputsPage.outputDateBox).toContainText('2025-12-12');
   });
+
+  test('Clear Inputs', async ({ page }) => {
+    await webInputsPage.inputNumberBox.fill('234');
+    await webInputsPage.inputTextBox.fill('test');
+    await webInputsPage.inputPasswordBox.fill('234');
+    await webInputsPage.inputDateBox.fill('2025-12-12');
+    await webInputsPage.displayInputsButton.click();
+    await expect(webInputsPage.outputDateBox).toContainText('2025-12-12');
+    await webInputsPage.clearInputsButton.click();
+    await expect(webInputsPage.inputNumberBox).toHaveValue('');
+    await expect(webInputsPage.inputTextBox).toHaveValue('');
+    await expect(webInputsPage.inputPasswordBox).toHaveValue('');
+    await expect(webInputsPage.inputDateBox).toHaveValue('');
+    await webInputsPage.displayInputsButton.click();
+    await expect(webInputsPage.outputNumberBox).toContainText('');
+    await expect(webInputsPage.outputTextBox).toContainText('');
+    await expect(webInputsPage.outputPasswordBox).toContainText('');
+    await expect(webInputsPage.outputDateBox).toContainText('');
+  });
 });
