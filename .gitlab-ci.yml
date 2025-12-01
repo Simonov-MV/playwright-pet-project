@@ -1,5 +1,5 @@
 # .gitlab-ci.yml
-image: mcr.microsoft.com/playwright:v1.49.0-jammy
+image: mcr.microsoft.com/playwright:v1.57.0-jammy
 
 stages:
   - test
